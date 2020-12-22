@@ -13,7 +13,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import { connect } from "react-redux";
 import * as actions from "../../../actions/product";
-import TableForm from "views/TableList/Order/OrderForm";
+import TableForm from "views/TableList/Member/MemberForm";
 
 
 const styles = {
@@ -50,7 +50,7 @@ const useStyles = makeStyles(styles);
 
 
 
-const OrderList = ({ ...props }) => {
+const MemberList = ({ ...props }) => {
     const classes = useStyles();
     const [currentId, setCurrentId] = useState(0);
 
@@ -68,7 +68,7 @@ const OrderList = ({ ...props }) => {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Đặt Bàn</h4>
+              <h4 className={classes.cardTitleWhite}>Nhân Viên</h4>
             </CardHeader>
             <CardBody>
               <Grid container spacing={2}>
@@ -77,27 +77,25 @@ const OrderList = ({ ...props }) => {
                     <Table>
                       <TableHead className={classes.root}>
                         <TableRow>
-                          <TableCell>Trạng Thái</TableCell>
-                          <TableCell>Mã Bàn</TableCell>
-                          <TableCell>Tên Khách Hàng</TableCell>
+                            <TableCell>Mã Nhân Viên</TableCell>
+                          <TableCell>Tên Nhân Viên</TableCell>
+                          <TableCell>Ngày Sinh</TableCell>
                           <TableCell>Điện Thoại</TableCell>
-                          <TableCell>Ngày Giờ Đặt</TableCell>
-                          <TableCell>Số Lượng Bàn</TableCell>
-                          <TableCell>Số Lượng Người</TableCell>
+                          <TableCell>Địa Chỉ</TableCell>
+                          <TableCell>Chức Vụ</TableCell>
+                          
                         </TableRow>
                       </TableHead>
-
+                      
                       <TableBody>
                         {props.productList.map((record, index) => {
                           return (
-                            <TableRow key={record.MaBan} hover>
-                              <TableCell>{record.TrangThai}</TableCell>
-                              <TableCell>{record.MaBan}</TableCell>
-                              <TableCell>{record.TenKH}</TableCell>
-                              <TableCell>{record.phoneKH} </TableCell>
-                              <TableCell>{record.TimeCheck}</TableCell>
-                              <TableCell>{record.SoLuongBan}</TableCell>
-                              <TableCell>{record.SoLuongNguoi}</TableCell>
+                            <TableRow key={record.MaMonAn} hover>
+                              <TableCell>{record.img_food} </TableCell>
+                              <TableCell>{record.TenMon}</TableCell>
+                              <TableCell>{record.price} </TableCell>
+                              <TableCell>{record.infomation} </TableCell>
+                             
                               <TableCell>
                                 <ButtonGroup variant="text">
                                   <Button>
@@ -138,4 +136,4 @@ const mapActionToProps = {
     deleteProduct: actions.Delete
 }
 
-export default connect(mapStateToProps, mapActionToProps)(OrderList);
+export default connect(mapStateToProps, mapActionToProps)(MemberList);

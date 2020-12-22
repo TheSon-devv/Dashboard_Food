@@ -5,6 +5,7 @@ import DashboardPage from "views/Dashboard/Dashboard.js";
 import CustomerList from "views/TableList/Customer/CustomerList.js";
 import FoodsList from "views/TableList/Food/FoodsList.js";
 import OrderList from "views/TableList/Order/OrderList.js";
+import MemberList from "views/TableList/Member/MemberList.js";
 
 
 const dashboardRoutes = [
@@ -34,6 +35,13 @@ const dashboardRoutes = [
     name: "Quản lý đặt bàn",
     icon: "content_paste",
     component: OrderList,
+    layout: "/admin"
+  },
+  {
+    path: "/nhanvien",
+    name: "Quản lý nhân viên",
+    icon: "content_paste",
+    component: MemberList,
     layout: "/admin"
   }
 ];

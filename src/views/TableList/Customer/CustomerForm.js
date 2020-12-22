@@ -63,7 +63,7 @@ const CustomerForm = ({ classes, ...props }) => {
     return (
       <Grid container>
         
-          <Card>
+          <Card style={{textAlign:"center"}}>
             <form
               noValidate
               autoComplete="off"
@@ -71,6 +71,18 @@ const CustomerForm = ({ classes, ...props }) => {
               onSubmit={handleSubmit}
             >
               <div>
+                <TextField
+                  name="tensp"
+                  variant="outlined"
+                  label="Mã khách hàng"
+                  type="text"
+                  value={values.TenMon}
+                  onChange={handleInputChange}
+                  {...(errors.tensp && {
+                    error: true,
+                    helperText: errors.tensp,
+                  })}
+                />
                 <TextField
                   name="tensp"
                   variant="outlined"
@@ -95,8 +107,6 @@ const CustomerForm = ({ classes, ...props }) => {
                     helperText: errors.tensp,
                   })}
                 />
-              </div>
-              <div>
                 <TextField
                   name="tensp"
                   variant="outlined"
@@ -109,6 +119,9 @@ const CustomerForm = ({ classes, ...props }) => {
                     helperText: errors.tensp,
                   })}
                 />
+              </div>
+              <div>
+                
                 <TextField
                   name="khuvuc"
                   variant="outlined"
@@ -124,7 +137,7 @@ const CustomerForm = ({ classes, ...props }) => {
               </div>
 
               <>
-                <Button variant="contained" color="default" size="medium" type="submit">
+                <Button variant="contained" color="default" size="primary" type="submit">
                   ADD
                 </Button>
               </>

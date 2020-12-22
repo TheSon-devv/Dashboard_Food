@@ -72,7 +72,7 @@ const TableForm = ({ classes, ...props }) => {
     return (
       <Grid container>
         
-          <Card>
+          <Card style={{textAlign:"center"}}>
             <form
               noValidate
               autoComplete="off"
@@ -133,7 +133,7 @@ const TableForm = ({ classes, ...props }) => {
               </div>
 
               <>
-                <Button variant="contained" color="default" type="submit">
+                <Button variant="contained" color="primary" type="submit" >
                   ADD
                 </Button>
               </>

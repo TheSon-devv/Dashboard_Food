@@ -78,6 +78,7 @@ const CustomerList = ({ ...props }) => {
                     <Table>
                       <TableHead className={classes.root}>
                         <TableRow>
+                          <TableCell>Mã khách hàng</TableCell>
                           <TableCell>Tên khách hàng</TableCell>
                           <TableCell>Email</TableCell>
                           <TableCell>Điện Thoại</TableCell>
@@ -87,7 +88,7 @@ const CustomerList = ({ ...props }) => {
                       <TableBody>
                         {props.productList.map((record, index) => {
                           return (
-                            <TableRow key={record.masp} hover>
+                            <TableRow key={record.MaKH} hover>
                               <TableCell>{record.TenKH}</TableCell>
                               <TableCell>{record.email} </TableCell>
                               <TableCell>{record.phoneKH} </TableCell>
