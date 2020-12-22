@@ -7,14 +7,14 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-import { Container, Grid, Paper, Table, TableHead, TableRow, TableCell, TableContainer, TableBody, withStyles, ButtonGroup, Button } from "@material-ui/core";
+import {  Grid,  Table, TableHead, TableRow, TableCell, TableContainer, TableBody,  ButtonGroup, Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import TextField from '@material-ui/core/TextField';
+
 
 import { connect } from "react-redux";
-import * as actions from "../../actions/product";
-import TableForm from "./TableForm";
+import * as actions from "../../../actions/product";
+import TableForm from "views/TableList/Customer/CustomerForm";
 
 
 const styles = {
@@ -49,18 +49,10 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-const useStyless = makeStyles((theme) => ({
-    root: {
-      '& .MuiTextField-root': {
-        margin: theme.spacing(1),
-        width: '25ch',
-      },
-    },
-  }));
 
-const TableList = ({ ...props }) => {
+const CustomerList = ({ ...props }) => {
     const classes = useStyles();
-    const classess=useStyless();
+    
     const [currentId, setCurrentId] = useState(0);
 
     useEffect(() => {
@@ -79,35 +71,9 @@ const TableList = ({ ...props }) => {
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Khách Hàng</h4>
             </CardHeader>
-
-            <CardHeader className={classess.root}>
-              <div>
-                <TextField
-                  id="standard-textarea"
-                  label="Tên Khách Hàng"
-                  multiline
-                />
-                <TextField id="standard-textarea" label="Email" multiline />
-                <TextField
-                  id="standard-textarea"
-                  label="Điện Thoại"
-                  multiline
-                />
-                <TextField id="standard-textarea" label="Khu Vực" multiline />
-              </div>
-              <div >
-                <Button variant="contained" style={{marginRight:"10px"}}>Default</Button>
-                <Button variant="contained" color="primary" style={{marginRight:"10px"}}>
-                  Primary
-                </Button>
-                <Button variant="contained" color="secondary">
-                  Secondary
-                </Button>
-              </div>
-            </CardHeader>
             <CardBody>
               <Grid container>
-                <Grid item xs={8}>
+                <Grid item xs={6}>
                   <TableContainer>
                     <Table>
                       <TableHead className={classes.root}>
@@ -146,9 +112,9 @@ const TableList = ({ ...props }) => {
                     </Table>
                   </TableContainer>
                 </Grid>
-                {/* <Grid item xs={4}>
+                <Grid item xs={6}>
                   <TableForm {...{ currentId, setCurrentId }} />
-                </Grid> */}
+                </Grid>
               </Grid>
             </CardBody>
           </Card>
@@ -166,4 +132,4 @@ const mapActionToProps = {
     deleteProduct: actions.Delete
 }
 
-export default connect(mapStateToProps, mapActionToProps)(TableList);
+export default connect(mapStateToProps, mapActionToProps)(CustomerList);

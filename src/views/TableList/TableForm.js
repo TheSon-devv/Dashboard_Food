@@ -66,7 +66,7 @@ const TableForm = ({ classes, ...props }) => {
                     <TextField
                         name="tensp"
                         variant="outlined"
-                        label="Tên sản phẩm"
+                        label="Phone"
                         type="text"
                         value={values.tensp}
                         onChange={handleInputChange}
