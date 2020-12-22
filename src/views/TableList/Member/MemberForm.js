@@ -124,6 +124,8 @@ const OrderForm = ({ classes, ...props }) => {
                   helperText: errors.soluongban,
                 })}
               />
+              </div>
+              <div>
               <TextField
                 name="soluongnguoi"
                 variant="outlined"
@@ -136,7 +138,6 @@ const OrderForm = ({ classes, ...props }) => {
                   helperText: errors.soluongnguoi,
                 })}
               />
-            </div>
             <TextField
                 name="soluongnguoi"
                 variant="outlined"
@@ -161,6 +162,7 @@ const OrderForm = ({ classes, ...props }) => {
                   helperText: errors.soluongnguoi,
                 })}
               />
+              </div>
             
             <div>
               <Button variant="contained" color="primary" type="submit">

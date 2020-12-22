@@ -104,8 +104,7 @@ const TableForm = ({ classes, ...props }) => {
                     helperText: errors.tenmon,
                   })}
                 />
-              </div>
-              <div>
+              
                 <TextField
                   name="price"
                   variant="outlined"

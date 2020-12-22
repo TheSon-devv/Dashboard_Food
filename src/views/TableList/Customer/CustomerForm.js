@@ -107,6 +107,8 @@ const CustomerForm = ({ classes, ...props }) => {
                     helperText: errors.tensp,
                   })}
                 />
+              </div>
+              <div>
                 <TextField
                   name="tensp"
                   variant="outlined"
@@ -119,9 +121,6 @@ const CustomerForm = ({ classes, ...props }) => {
                     helperText: errors.tensp,
                   })}
                 />
-              </div>
-              <div>
-                
                 <TextField
                   name="khuvuc"
                   variant="outlined"

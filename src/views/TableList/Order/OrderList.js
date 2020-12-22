@@ -72,7 +72,10 @@ const OrderList = ({ ...props }) => {
             </CardHeader>
             <CardBody>
               <Grid container spacing={2}>
-                <Grid item md={6}>
+                <Grid item md={12}>
+                  <TableForm {...{ currentId, setCurrentId }} />
+                </Grid>
+                <Grid item md={12}>
                   <TableContainer>
                     <Table>
                       <TableHead className={classes.root}>
@@ -118,9 +121,7 @@ const OrderList = ({ ...props }) => {
                     </Table>
                   </TableContainer>
                 </Grid>
-                <Grid item md={6}>
-                  <TableForm {...{ currentId, setCurrentId }} />
-                </Grid>
+                
               </Grid>
             </CardBody>
           </Card>

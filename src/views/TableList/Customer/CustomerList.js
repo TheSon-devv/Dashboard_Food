@@ -72,8 +72,12 @@ const CustomerList = ({ ...props }) => {
               <h4 className={classes.cardTitleWhite}>Khách Hàng</h4>
             </CardHeader>
             <CardBody>
-              <Grid container>
-                <Grid item xs={6}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TableForm {...{ currentId, setCurrentId }} />
+                </Grid>
+
+                <Grid item xs={12}>
                   <TableContainer>
                     <Table>
                       <TableHead className={classes.root}>
@@ -101,7 +105,7 @@ const CustomerList = ({ ...props }) => {
                                   <Button>
                                     <DeleteIcon
                                       color="secondary"
-                                      onClick={() => onDelete(record.id)}
+                                      onClick={() => onDelete(record.MaKH)}
                                     />
                                   </Button>
                                 </ButtonGroup>
@@ -113,9 +117,7 @@ const CustomerList = ({ ...props }) => {
                     </Table>
                   </TableContainer>
                 </Grid>
-                <Grid item xs={6}>
-                  <TableForm {...{ currentId, setCurrentId }} />
-                </Grid>
+                
               </Grid>
             </CardBody>
           </Card>
