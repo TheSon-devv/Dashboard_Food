@@ -2,12 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 import useForm from "../useForm";
 import { Grid, TextField, withStyles, Button } from "@material-ui/core";
 import Card from "components/Card/Card.js";
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormLabel from '@material-ui/core/FormLabel';
 import { connect } from "react-redux";
 import * as actions from "../../../actions/product";
 
@@ -90,35 +84,12 @@ const OrderForm = ({ classes, ...props }) => {
             className={classes.root}
             onSubmit={handleSubmit}
           >
-          <div>
-            <FormControlLabel
-                  value="best"
-                  control={<Radio />}
-                  label="Đã Thanh Toán"
-                />
-                <FormControlLabel
-                  value="worst"
-                  control={<Radio />}
-                  label="Chưa Thanh Toán"
-                />
-            </div>
+          
             <div>
-            <TextField
-                name="tenkh"
-                variant="outlined"
-                label="Mã bàn"
-                type="text"
-                value={values.TenKH}
-                onChange={handleInputChange}
-                {...(errors.tenkh && {
-                  error: true,
-                  helperText: errors.tenkh,
-                })}
-              />
               <TextField
                 name="tenkh"
                 variant="outlined"
-                label="Tên khách hàng"
+                label="Mã Nhân Viên"
                 type="text"
                 value={values.TenKH}
                 onChange={handleInputChange}
@@ -130,7 +101,7 @@ const OrderForm = ({ classes, ...props }) => {
               <TextField
                 name="phone"
                 variant="outlined"
-                label="Điện thoại"
+                label="Tên Nhân Viên"
                 type="text"
                 value={values.phoneKH}
                 onChange={handleInputChange}
@@ -139,15 +110,13 @@ const OrderForm = ({ classes, ...props }) => {
                   helperText: errors.phone,
                 })}
               />
-              </div>
-              <div>
 
               
               <TextField
-                name="soluongban"
+                name="date"
                 variant="outlined"
-                label="Số Lượng Bàn"
-                type="text"
+                
+                type="date"
                 value={values.SoLuongBan}
                 onChange={handleInputChange}
                 {...(errors.soluongban && {
@@ -155,10 +124,24 @@ const OrderForm = ({ classes, ...props }) => {
                   helperText: errors.soluongban,
                 })}
               />
+              </div>
+              <div>
               <TextField
                 name="soluongnguoi"
                 variant="outlined"
-                label="Số Lượng Người"
+                label="Điện Thoại"
+                type="text"
+                value={values.SoLuongNguoi}
+                onChange={handleInputChange}
+                {...(errors.soluongnguoi && {
+                  error: true,
+                  helperText: errors.soluongnguoi,
+                })}
+              />
+            <TextField
+                name="soluongnguoi"
+                variant="outlined"
+                label="Địa Chỉ"
                 type="text"
                 value={values.SoLuongNguoi}
                 onChange={handleInputChange}
@@ -168,19 +151,18 @@ const OrderForm = ({ classes, ...props }) => {
                 })}
               />
               <TextField
-                name="datetime"
-                type="datetime-local"
+                name="soluongnguoi"
                 variant="outlined"
-                style={{width:"209px"}}
-                value={values.timecheck}
+                label="Chức Vụ"
+                type="text"
+                value={values.SoLuongNguoi}
                 onChange={handleInputChange}
-                {...(errors.datetime && {
+                {...(errors.soluongnguoi && {
                   error: true,
-                  helperText: errors.datetime,
+                  helperText: errors.soluongnguoi,
                 })}
               />
-            </div>
-            
+              </div>
             
             <div>
               <Button variant="contained" color="primary" type="submit">

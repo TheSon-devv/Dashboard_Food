@@ -71,53 +71,57 @@ const OrderList = ({ ...props }) => {
               <h4 className={classes.cardTitleWhite}>Đặt Bàn</h4>
             </CardHeader>
             <CardBody>
-              <Grid item md={12}>
-                <TableForm {...{ currentId, setCurrentId }} />
-              </Grid>
+              <Grid container spacing={2}>
+                <Grid item md={12}>
+                  <TableForm {...{ currentId, setCurrentId }} />
+                </Grid>
+                <Grid item md={12}>
+                  <TableContainer>
+                    <Table>
+                      <TableHead className={classes.root}>
+                        <TableRow>
+                          <TableCell>Trạng Thái</TableCell>
+                          <TableCell>Mã Bàn</TableCell>
+                          <TableCell>Tên Khách Hàng</TableCell>
+                          <TableCell>Điện Thoại</TableCell>
+                          <TableCell>Ngày Giờ Đặt</TableCell>
+                          <TableCell>Số Lượng Bàn</TableCell>
+                          <TableCell>Số Lượng Người</TableCell>
+                        </TableRow>
+                      </TableHead>
 
-              <Grid item md={12}>
-                <TableContainer>
-                  <Table>
-                    <TableHead className={classes.root}>
-                      <TableRow>
-                        <TableCell>Trạng Thái</TableCell>
-                        <TableCell>Tên Khách Hàng</TableCell>
-                        <TableCell>Điện Thoại</TableCell>
-                        <TableCell>Ngày Giờ Đặt</TableCell>
-                        <TableCell>Số Lượng Bàn</TableCell>
-                        <TableCell>Số Lượng Người</TableCell>
-                      </TableRow>
-                    </TableHead>
-
-                    <TableBody>
-                      {props.productList.map((record, index) => {
-                        return (
-                          <TableRow key={record.MaBan} hover>
-                            <TableCell>{record.TrangThai}</TableCell>
-                            <TableCell>{record.TenKH}</TableCell>
-                            <TableCell>{record.phoneKH} </TableCell>
-                            <TableCell>{record.TimeCheck}</TableCell>
-                            <TableCell>{record.SoLuongBan}</TableCell>
-                            <TableCell>{record.SoLuongNguoi}</TableCell>
-                            <TableCell>
-                              <ButtonGroup variant="text">
-                                <Button>
-                                  <EditIcon color="primary" />
-                                </Button>
-                                <Button>
-                                  <DeleteIcon
-                                    color="secondary"
-                                    onClick={() => onDelete(record.id)}
-                                  />
-                                </Button>
-                              </ButtonGroup>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+                      <TableBody>
+                        {props.productList.map((record, index) => {
+                          return (
+                            <TableRow key={record.MaBan} hover>
+                              <TableCell>{record.TrangThai}</TableCell>
+                              <TableCell>{record.MaBan}</TableCell>
+                              <TableCell>{record.TenKH}</TableCell>
+                              <TableCell>{record.phoneKH} </TableCell>
+                              <TableCell>{record.TimeCheck}</TableCell>
+                              <TableCell>{record.SoLuongBan}</TableCell>
+                              <TableCell>{record.SoLuongNguoi}</TableCell>
+                              <TableCell>
+                                <ButtonGroup variant="text">
+                                  <Button>
+                                    <EditIcon color="primary" />
+                                  </Button>
+                                  <Button>
+                                    <DeleteIcon
+                                      color="secondary"
+                                      onClick={() => onDelete(record.id)}
+                                    />
+                                  </Button>
+                                </ButtonGroup>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Grid>
+                
               </Grid>
             </CardBody>
           </Card>

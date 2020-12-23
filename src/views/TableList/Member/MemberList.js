@@ -13,7 +13,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import { connect } from "react-redux";
 import * as actions from "../../../actions/product";
-import TableForm from "views/TableList/Food/FoodForm";
+import TableForm from "views/TableList/Member/MemberForm";
 
 
 const styles = {
@@ -50,7 +50,7 @@ const useStyles = makeStyles(styles);
 
 
 
-const FoodsList = ({ ...props }) => {
+const MemberList = ({ ...props }) => {
     const classes = useStyles();
     const [currentId, setCurrentId] = useState(0);
 
@@ -68,11 +68,11 @@ const FoodsList = ({ ...props }) => {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Món Ăn</h4>
+              <h4 className={classes.cardTitleWhite}>Nhân Viên</h4>
             </CardHeader>
             <CardBody>
               <Grid container spacing={2}>
-                <Grid item md={12}>
+              <Grid item xs={12}>
                   <TableForm {...{ currentId, setCurrentId }} />
                 </Grid>
 
@@ -81,10 +81,12 @@ const FoodsList = ({ ...props }) => {
                     <Table>
                       <TableHead className={classes.root}>
                         <TableRow>
-                          <TableCell>Ảnh</TableCell>
-                          <TableCell>Tên món ăn</TableCell>
-                          <TableCell>Giá</TableCell>
-                          <TableCell>Infomation</TableCell>
+                            <TableCell>Mã Nhân Viên</TableCell>
+                          <TableCell>Tên Nhân Viên</TableCell>
+                          <TableCell>Ngày Sinh</TableCell>
+                          <TableCell>Điện Thoại</TableCell>
+                          <TableCell>Địa Chỉ</TableCell>
+                          <TableCell>Chức Vụ</TableCell>
                           
                         </TableRow>
                       </TableHead>
@@ -136,4 +138,4 @@ const mapActionToProps = {
     deleteProduct: actions.Delete
 }
 
-export default connect(mapStateToProps, mapActionToProps)(FoodsList);
+export default connect(mapStateToProps, mapActionToProps)(MemberList);
