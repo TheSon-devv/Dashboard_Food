@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const ProductUrl = 'http://localhost:52419/api/';
+const Url = 'http://localhost:52419/api/';
 
-export const product = (url = ProductUrl + 'Sanphams/') => {
+export const product = (url = Url + 'Sanphams/') => {
     return {
         fetchAll: () => axios.get(url),
         fetchById: id => axios.get(url + id),
@@ -12,3 +12,13 @@ export const product = (url = ProductUrl + 'Sanphams/') => {
     }
 }
 
+
+export const khachHang = (url = Url + 'KhachHang/') => {
+    return {
+        fetchAllKhachHang: () => axios.get(url),
+        fetchByIdKhachHang: maKH => axios.get(url + maKH),
+        createKhachHang: newMaKH => axios.post(url, newMaKH),
+        updateKhachHang: (maKH, updateMaKH) => axios.put(url + maKH, updateMaKH),
+        deleteKhachHang: maKH => axios.delete(url + maKH)
+    }
+}
