@@ -22,3 +22,13 @@ export const khachHang = (url = Url + 'KhachHang/') => {
         deleteKhachHang: maKH => axios.delete(url + maKH)
     }
 }
+
+export const nhanVien = (url = Url + 'NhanVien/') => {
+    return {
+        fetchAllNhanVien: () => axios.get(url),
+        fetchByIdNhanVien: maNV => axios.get(url + maNV),
+        createNhanVien: newMaNV => axios.post(url, newMaNV),
+        updateNhanVien: (maNV, updateMaNV) => axios.put(url + maNV, updateMaNV),
+        deleteNhanVien: maNV => axios.delete(url + maNV)
+    }
+}

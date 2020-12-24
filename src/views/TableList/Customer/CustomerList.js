@@ -14,7 +14,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import { connect } from "react-redux";
 import * as actions from "../../../actions/khachHang";
-import CustomerForm from "views/TableList/Customer/CustomerForm";
+import CustomerForm from "./CustomerForm";
 
 
 const styles = {
