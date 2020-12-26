@@ -12,7 +12,7 @@ const useForm = (initialValues,validate,setCurrentId) => {
             ...filedValue
         })
         validate(filedValue)
-    }
+    }   
     const resetForm = () => {
         setValues({
             ...initialValues

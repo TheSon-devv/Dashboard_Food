@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import product from "./product";
 import khachHang from "./khachHang";
 import nhanVien from "./nhanVien";
+import datBan from "./datBan";
+import monAn from "./monAn";
 
 export const reducers = combineReducers({
-    product,
+    monAn,
     khachHang,
-    nhanVien
+    nhanVien,
+    datBan
 })

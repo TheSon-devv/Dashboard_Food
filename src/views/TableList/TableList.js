@@ -13,7 +13,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import TextField from '@material-ui/core/TextField';
 
 import { connect } from "react-redux";
-import * as actions from "../../actions/product";
+import * as actions from "../../actions/monAn";
 import TableForm from "./TableForm";
 
 

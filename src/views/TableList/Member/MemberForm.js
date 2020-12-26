@@ -38,7 +38,8 @@ const MemberForm = ({ classes, ...props }) => {
             temp.maNV = fieldValues.maNV ? "" : "This field is requied"
         if ("tenNV" in fieldValues)
             temp.tenNV = fieldValues.tenNV ? "" : "This field is requied";
-
+        if ("dateStart" in fieldValues)
+            temp.dateStart = fieldValues.dateStart ? "" : "This field is requied";
         setErrors({
             ...temp
         })
@@ -47,8 +48,8 @@ const MemberForm = ({ classes, ...props }) => {
     }
 
     const {
-        values, setValues, handleInputChange, errors, setErrors,resetForm
-    } = useForm(initialValues, validate,props.setCurrentId);
+        values, setValues, handleInputChange, errors, setErrors, resetForm
+    } = useForm(initialValues, validate, props.setCurrentId);
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -107,11 +108,13 @@ const MemberForm = ({ classes, ...props }) => {
                         <TextField
                             name="dateStart"
                             variant="outlined"
-
                             type="datetime-local"
                             value={values.dateStart}
                             onChange={handleInputChange}
-                            
+                            {...(errors.dateStart && {
+                                error: true,
+                                helperText: errors.dateStart,
+                            })}
                         />
                     </div>
                     <div>
@@ -122,7 +125,7 @@ const MemberForm = ({ classes, ...props }) => {
                             type="text"
                             value={values.dienThoai}
                             onChange={handleInputChange}
-                            
+
                         />
                         <TextField
                             name="diaChi"
@@ -131,7 +134,7 @@ const MemberForm = ({ classes, ...props }) => {
                             type="text"
                             value={values.diaChi}
                             onChange={handleInputChange}
-                       
+
                         />
                         <TextField
                             name="chucVu"
@@ -140,7 +143,7 @@ const MemberForm = ({ classes, ...props }) => {
                             type="text"
                             value={values.chucVu}
                             onChange={handleInputChange}
-                        
+
                         />
                     </div>
 
@@ -148,7 +151,7 @@ const MemberForm = ({ classes, ...props }) => {
                         <Button variant="contained" color="primary" type="submit">
                             ADD
                         </Button>
-                        <Button variant="contained" color="primary" onClick={resetForm}>
+                        <Button variant="contained" color="default" onClick={resetForm}>
                             Reset
                         </Button>
                     </div>

@@ -96,7 +96,7 @@ const CustomerList = ({ ...props }) => {
                                                         <TableCell>{record.tenKH}</TableCell>
                                                         <TableCell>{record.email} </TableCell>
                                                         <TableCell>{record.phoneKH} </TableCell>
-                                                        <TableCell>{record.maKV} </TableCell>
+                                                        <TableCell>{record.tenKV} </TableCell>
                                                         <TableCell>
                                                             <ButtonGroup variant="text">
                                                                 <Button>

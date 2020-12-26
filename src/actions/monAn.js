@@ -1,4 +1,4 @@
-import {product} from "./api";
+import {monAn} from "./api";
 
 export const ACTION_TYPE = {
     CREATE: 'CREATE',
@@ -11,8 +11,8 @@ const formateData = data => ({
     ...data
 })
 
-export const fetchAll = () => dispatch => {
-    product().fetchAll()
+export const fetchAllMonAn = () => dispatch => {
+    monAn().fetchAllMonAn()
         .then(
             response => {
                 console.log(response)
@@ -25,9 +25,9 @@ export const fetchAll = () => dispatch => {
 
 }
 
-export const create = (data) => dispatch => {
+export const createMonAn = (data) => dispatch => {
     data = formateData(data)
-    product().create(data)
+    monAn().createMonAn(data)
         .then(res => {
             dispatch({
                 type : ACTION_TYPE.CREATE,
@@ -37,24 +37,24 @@ export const create = (data) => dispatch => {
             .catch(err => console.log(err))
 }
 
-export const update = (id,data) => dispatch => {
+export const updateMonAn = (maMonAn,data) => dispatch => {
     data = formateData(data)
-    product().update(id,data)
+    monAn().updateMonAn(maMonAn,data)
         .then(res => {
             dispatch({
                 type : ACTION_TYPE.UPDATE,
-                payload: {id,...data}
+                payload: {maMonAn,...data}
             })
         })
         .catch(err => console.log(err))
 }
 
-export const Delete = (masp,data) => dispatch => {
-    product().delete(masp)
+export const DeleteMonAn = (maMonAn,data) => dispatch => {
+    monAn().deleteMonAn(maMonAn)
         .then(res => {
             dispatch({
                 type : ACTION_TYPE.DELETE,
-                payload: masp
+                payload: maMonAn
             })
         })
         .catch(err => console.log(err))

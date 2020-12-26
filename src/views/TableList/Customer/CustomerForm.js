@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import useForm from "../useForm";
-import { Grid, TextField, withStyles, Button } from "@material-ui/core";
+import { Grid, TextField, withStyles, Button, FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
 import Card from "components/Card/Card.js";
 import { connect } from "react-redux";
 import * as actions from "../../../actions/khachHang";
@@ -19,7 +19,14 @@ const styles = theme => ({
     },
     smMargin: {
         margin: theme.spacing(1)
-    }
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
 })
 
 const initialValues = {
@@ -28,7 +35,7 @@ const initialValues = {
     email: '',
     password: '',
     phoneKH: '',
-    maKV: ''
+    maKV : ''
 }
 
 const CustomerForm = ({ classes, ...props }) => {
@@ -70,7 +77,7 @@ const CustomerForm = ({ classes, ...props }) => {
 
             }
             if (props.currentId === 0)
-                props.createKH(values, 
+                props.createKH(values,
                     addToast("Thêm thành công !", { appearance: 'success' })
 
                 )
@@ -79,6 +86,10 @@ const CustomerForm = ({ classes, ...props }) => {
         }
         console.log(values);
         // resetForm()
+    }
+
+    const handleOptionChange = (e) => {
+        setValues(e.target.value)
     }
 
     useEffect(() => {
@@ -163,6 +174,26 @@ const CustomerForm = ({ classes, ...props }) => {
                                 helperText: errors.phoneKH,
                             })}
                         />
+                        {/* <FormControl variant="outlined" className={classes.formControl} >
+                            <InputLabel >Khu Vực</InputLabel>
+                            <Select
+                                name="maKV"
+                                value={values.maKV}
+                                onChange={handleInputChange}
+                                label="Khu Vực"
+                                
+                            >
+                                {
+                                    props.listKH.map((e,index) => {
+                                        return(
+                                            
+                                            <MenuItem key={e.maKH}>{e.tenKV}</MenuItem>
+                                        )
+                                    })
+                                }
+                                
+                            </Select>
+                        </FormControl> */}
                         <TextField
                             name="maKV"
                             variant="outlined"

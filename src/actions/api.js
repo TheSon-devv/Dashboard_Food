@@ -2,13 +2,13 @@ import axios from "axios";
 
 const Url = 'http://localhost:52419/api/';
 
-export const product = (url = Url + 'Sanphams/') => {
+export const monAn = (url = Url + 'MonAn/') => {
     return {
-        fetchAll: () => axios.get(url),
-        fetchById: id => axios.get(url + id),
-        create: newRecord => axios.post(url, newRecord),
-        update: (masp, updateRecord) => axios.put(url + masp, updateRecord),
-        delete: masp => axios.delete(url + masp)
+        fetchAllMonAn: () => axios.get(url),
+        fetchByIdMonAn: maMonAn => axios.get(url + maMonAn),
+        createMonAn: newMonAn => axios.post(url, newMonAn),
+        updateMonAn: (maMonAn, updateMonAn) => axios.put(url + maMonAn, updateMonAn),
+        deleteMonAn: maMonAn => axios.delete(url + maMonAn)
     }
 }
 
@@ -30,5 +30,15 @@ export const nhanVien = (url = Url + 'NhanVien/') => {
         createNhanVien: newMaNV => axios.post(url, newMaNV),
         updateNhanVien: (maNV, updateMaNV) => axios.put(url + maNV, updateMaNV),
         deleteNhanVien: maNV => axios.delete(url + maNV)
+    }
+}
+
+export const datBan = (url = Url + 'DatBan/') => {
+    return {
+        fetchAllDatBan: () => axios.get(url),
+        fetchByIdDatBan: maBan => axios.get(url + maBan),
+        createDatBan: newMaBan => axios.post(url, newMaBan),
+        updateDatBan: (maBan, updateMaBan) => axios.put(url + maBan, updateMaBan),
+        deleteDatBan: maBan => axios.delete(url + maBan)
     }
 }
