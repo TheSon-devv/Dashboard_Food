@@ -80,7 +80,7 @@ const TableForm = ({ classes, ...props }) => {
               onSubmit={handleSubmit}
             >
               <div>
-                <TextField
+                {/* <TextField
                   name="anh"
                   variant="outlined"
                   label="Ảnh"
@@ -91,7 +91,7 @@ const TableForm = ({ classes, ...props }) => {
                     error: true,
                     helperText: errors.anh,
                   })}
-                />
+                /> */}
                 <TextField
                   name="tenmon"
                   variant="outlined"
