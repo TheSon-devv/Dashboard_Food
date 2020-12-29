@@ -42,3 +42,20 @@ export const datBan = (url = Url + 'DatBan/') => {
         deleteDatBan: maBan => axios.delete(url + maBan)
     }
 }
+
+export const khuVuc = (url = Url + 'KhuVuc/') => {
+    return {
+        fetchAllKhuVuc: () => axios.get(url),
+        fetchByIdKhuVuc: maKV => axios.get(url + maKV)
+    }
+}
+
+export const hoaDon = (url = Url + 'HoaDonDatBan/') => {
+    return {
+        fetchAllHDDB: () => axios.get(url),
+        fetchByIdHDDB: maHDDB => axios.get(url + maHDDB),
+        createHDDB: newMaHDDB => axios.post(url, newMaHDDB),
+        updateHDDB: (maHDDB, updateHDDB) => axios.put(url + maHDDB, updateHDDB),
+        deleteHDDB: maHDDB => axios.delete(url + maHDDB)
+    }
+}

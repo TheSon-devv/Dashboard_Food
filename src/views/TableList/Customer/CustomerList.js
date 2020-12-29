@@ -15,7 +15,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { connect } from "react-redux";
 import * as actions from "../../../actions/khachHang";
 import CustomerForm from "./CustomerForm";
-
+import * as actionsKhuVuc from "../../../actions/khuVuc";
 
 const styles = {
     cardCategoryWhite: {
@@ -56,12 +56,13 @@ const CustomerList = ({ ...props }) => {
     const [currentId, setCurrentId] = useState(0);
 
     useEffect(() => {
-        props.fetchAllKhachHang()
+        props.fetchAllKhuVuc();
+        props.fetchAllKhachHang();
     }, [])
 
     const onDelete = maKH => {
-        if (window.confirm('Are you sure to delete record?')) {
-            props.deleteKhachHang(maKH, window.alert('Delete succesful') )
+        if (window.confirm('Bạn có muốn xóa khách hàng ?')) {
+            props.deleteKhachHang(maKH, window.alert('Xóa thành công !') )
         }
     }
     return (
@@ -73,10 +74,10 @@ const CustomerList = ({ ...props }) => {
                     </CardHeader>
                     <CardBody>
                         <Grid container>
-                            <Grid item xs={6}>
+                            <Grid item xs={12}>
                                 <CustomerForm {...{ currentId, setCurrentId }} />
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={12}>
                                 <TableContainer>
                                     <Table>
                                         <TableHead className={classes.root}>
@@ -135,6 +136,7 @@ const mapStateToProps = state => ({
 
 const mapActionToProps = {
     fetchAllKhachHang: actions.fetchAllKhachHang,
+    fetchAllKhuVuc: actionsKhuVuc.fetchAllKhuVuc,
     deleteKhachHang: actions.DeleteKhachHang
 }
 

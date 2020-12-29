@@ -12,8 +12,10 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 import { connect } from "react-redux";
-import * as actions from "../../../actions/datBan";
-import OrderForm from "views/TableList/Order/OrderForm";
+import * as actionsDatBan from "../../../actions/datBan";
+import * as actionsHDDB from "../../../actions/hoaDon";
+import * as actionsKhachHang from "../../../actions/khachHang";
+import HDDBForm from "views/TableList/Order/HDDBForm";
 
 
 const styles = {
@@ -55,10 +57,17 @@ const OrderList = ({ ...props }) => {
     const [currentId, setCurrentId] = useState(0);
 
     useEffect(() => {
-        props.fetchAllDatBan()
+        props.fetchAllDatBan();
+        props.fetchAllHDDB();
+        props.fetchAllKhachHang();
     }, [])
 
-    const onDelete = maBan => {
+    const onDeleteHoaDon = maHDDB => {
+        if (window.confirm('Are you sure to delete record?')) {
+            props.deleteHDDB(maHDDB, () => { window.alert('Delete succesful') })
+        }
+    }
+    const onDeleteDatBan = maBan => {
         if (window.confirm('Are you sure to delete record?')) {
             props.deleteDatBan(maBan, () => { window.alert('Delete succesful') })
         }
@@ -72,7 +81,7 @@ const OrderList = ({ ...props }) => {
                     </CardHeader>
                     <CardBody>
                         <Grid container spacing={2}>
-                           
+
                             <Grid item md={12}>
                                 <TableContainer>
                                     <Table>
@@ -92,18 +101,18 @@ const OrderList = ({ ...props }) => {
                                                 return (
                                                     <TableRow key={record.maBan} hover>
                                                         <TableCell>{record.maBan}</TableCell>
-                                                        <TableCell>{record.tenKH}</TableCell>
-                                                        <TableCell>{record.phoneKH} </TableCell>
+                                                        <TableCell>{record.tenKhachHang}</TableCell>
+                                                        <TableCell>{record.phoneKhachHang} </TableCell>
                                                         <TableCell>{record.timeCheck}</TableCell>
                                                         <TableCell>{record.soLuongBan}</TableCell>
                                                         <TableCell>{record.soLuongNguoi}</TableCell>
                                                         <TableCell>
                                                             <ButtonGroup variant="text">
-                                                            
+
                                                                 <Button>
                                                                     <DeleteIcon
                                                                         color="secondary"
-                                                                        onClick={() => onDelete(record.maBan)}
+                                                                        onClick={() => onDeleteDatBan(record.maBan)}
                                                                     />
                                                                 </Button>
                                                             </ButtonGroup>
@@ -120,17 +129,83 @@ const OrderList = ({ ...props }) => {
                     </CardBody>
                 </Card>
             </GridItem>
+
+            <GridItem xs={12} sm={12} md={12}>
+                <Card>
+                    <CardHeader color="primary">
+                        <h4 className={classes.cardTitleWhite}>Hóa Đơn Đặt Bàn</h4>
+                    </CardHeader>
+                    <CardBody>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <HDDBForm {...{ currentId, setCurrentId }} />
+                            </Grid>
+                            <Grid item md={12}>
+                            <TableContainer>
+                                    <Table>
+                                        <TableHead className={classes.root}>
+                                            <TableRow>
+                                                <TableCell>Mã hóa đơn </TableCell>
+                                                <TableCell>Tổng tiền</TableCell>
+                                                <TableCell>Bàn</TableCell>
+                                                <TableCell>Ngày giờ đặt</TableCell>
+                                                <TableCell>Tên khách hàng</TableCell>
+                                                <TableCell>Trạng thái</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {props.listHDDB.map((e, index) => {
+                                                return (
+                                                    <TableRow key={e.maHDDB} hover>
+                                                        <TableCell>{e.maHDDB}</TableCell>
+                                                        <TableCell>{e.priceHDDB} VND</TableCell>
+                                                        <TableCell>{e.maBan}</TableCell>
+                                                        <TableCell>{e.timeCheck} </TableCell>
+                                                        <TableCell>{e.tenKH} </TableCell>
+                                                        <TableCell>{e.trangThai} </TableCell>
+                                                        <TableCell>
+                                                            <ButtonGroup variant="text">
+                                                                <Button>
+                                                                    <EditIcon 
+                                                                        color="primary" 
+                                                                        onClick={() => setCurrentId(e.maHDDB)}
+                                                                    />
+                                                                </Button>
+                                                                <Button>
+                                                                    <DeleteIcon
+                                                                        color="secondary"
+                                                                        onClick={() => onDeleteHoaDon(e.maHDDB)}
+                                                                    />
+                                                                </Button>
+                                                            </ButtonGroup>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                )
+                                            })}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </Grid>
+
+                        </Grid>
+                    </CardBody>
+                </Card>
+            </GridItem>
         </GridContainer>
     );
 }
 
 const mapStateToProps = state => ({
-    listDB: state.datBan.datBanList
+    listDB: state.datBan.datBanList,
+    listHDDB:state.hoaDon.HDDBList
 })
 
 const mapActionToProps = {
-    fetchAllDatBan: actions.fetchAllDatBan,
-    deleteDatBan: actions.DeleteDatBan
+    fetchAllDatBan: actionsDatBan.fetchAllDatBan,
+    fetchAllKhachHang:actionsKhachHang.fetchAllKhachHang,
+    fetchAllHDDB:actionsHDDB.fetchAllHDDB,
+    deleteHDDB: actionsHDDB.DeleteHDDB,
+    deleteDatBan:actionsDatBan.DeleteDatBan
 }
 
 export default connect(mapStateToProps, mapActionToProps)(OrderList);

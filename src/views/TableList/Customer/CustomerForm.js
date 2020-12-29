@@ -35,7 +35,7 @@ const initialValues = {
     email: '',
     password: '',
     phoneKH: '',
-    maKV : ''
+    maKV: ''
 }
 
 const CustomerForm = ({ classes, ...props }) => {
@@ -49,15 +49,15 @@ const CustomerForm = ({ classes, ...props }) => {
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('maKH' in fieldValues)
-            temp.maKH = fieldValues.maKH ? "" : "This field is requied"
+            temp.maKH = fieldValues.maKH ? "" : "Vui lòng nhập mã khách hàng"
         if ('tenKH' in fieldValues)
-            temp.tenKH = fieldValues.tenKH ? "" : "This field is requied"
+            temp.tenKH = fieldValues.tenKH ? "" : "Vui lòng nhập tên khách hàng"
         if ('email' in fieldValues)
-            temp.email = fieldValues.email ? "" : "This field is requied"
+            temp.email = (/^$|.+@.+.....+/).test(fieldValues.email) ? "" : "Vui lòng nhập email"
         if ('phoneKH' in fieldValues)
-            temp.phoneKH = fieldValues.phoneKH ? "" : "This field is requied"
+            temp.phoneKH = fieldValues.phoneKH ? "" : "Vui lòng nhập số điện thoại"
         if ('maKV' in fieldValues)
-            temp.maKV = fieldValues.maKV ? "" : "This field is requied"
+            temp.maKV = fieldValues.maKV ? "" : "Vui lòng nhập khu vực"
         setErrors({
             ...temp
         })
@@ -73,12 +73,12 @@ const CustomerForm = ({ classes, ...props }) => {
         e.preventDefault();
         if (validate()) {
             const onSuccess = () => {
-                addToast("Thêm thành công !", { appearance: 'success' })
+                addToast("Thêm khách hàng thành công !", { appearance: 'success' })
 
             }
             if (props.currentId === 0)
                 props.createKH(values,
-                    addToast("Thêm thành công !", { appearance: 'success' })
+                    addToast("Thêm khách hàng thành công !", { appearance: 'success' })
 
                 )
             else
@@ -86,10 +86,6 @@ const CustomerForm = ({ classes, ...props }) => {
         }
         console.log(values);
         // resetForm()
-    }
-
-    const handleOptionChange = (e) => {
-        setValues(e.target.value)
     }
 
     useEffect(() => {
@@ -174,38 +170,25 @@ const CustomerForm = ({ classes, ...props }) => {
                                 helperText: errors.phoneKH,
                             })}
                         />
-                        {/* <FormControl variant="outlined" className={classes.formControl} >
-                            <InputLabel >Khu Vực</InputLabel>
-                            <Select
-                                name="maKV"
-                                value={values.maKV}
-                                onChange={handleInputChange}
-                                label="Khu Vực"
-                                
-                            >
-                                {
-                                    props.listKH.map((e,index) => {
-                                        return(
-                                            
-                                            <MenuItem key={e.maKH}>{e.tenKV}</MenuItem>
-                                        )
-                                    })
-                                }
-                                
-                            </Select>
-                        </FormControl> */}
                         <TextField
                             name="maKV"
-                            variant="outlined"
+                            id="outlined-select-currency"
+                            select
                             label="Khu Vực"
-                            type="text"
                             value={values.maKV}
                             onChange={handleInputChange}
+                            variant="outlined"
                             {...(errors.maKV && {
                                 error: true,
                                 helperText: errors.maKV,
                             })}
-                        />
+                        >
+                            {props.listKV.map((e) => (
+                                <MenuItem key={e.maKV} value={e.maKV}>
+                                    {e.tenKV}
+                                </MenuItem>
+                            ))}
+                        </TextField>
                     </div>
 
                     <>
@@ -223,7 +206,8 @@ const CustomerForm = ({ classes, ...props }) => {
 }
 
 const mapStateToProps = state => ({
-    listKH: state.khachHang.khachHanglist
+    listKH: state.khachHang.khachHanglist,
+    listKV: state.khuVuc.khuVucList
 })
 
 const mapActionToProps = {

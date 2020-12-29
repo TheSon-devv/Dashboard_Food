@@ -14,7 +14,7 @@ const khachHang = (state = listKhachHang, action) => {
         case ACTION_TYPE_KHACH_HANG.CREATE_KHACH_HANG:
             return {
                 ...state,
-                khachHanglist: [...state.khachHanglist,action.payload]
+                khachHanglist: [...state.khachHanglist, action.payload]
             }
 
         case ACTION_TYPE_KHACH_HANG.UPDATE_KHACH_HANG:
