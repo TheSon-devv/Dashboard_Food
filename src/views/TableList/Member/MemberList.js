@@ -7,13 +7,13 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-import {  Grid,  Table, TableHead, TableRow, TableCell, TableContainer, TableBody,  ButtonGroup, Button } from "@material-ui/core";
+import { Grid, Table, TableHead, TableRow, TableCell, TableContainer, TableBody, ButtonGroup, Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 import { connect } from "react-redux";
-import * as actions from "../../../actions/product";
-import TableForm from "views/TableList/Member/MemberForm";
+import * as actions from "../../../actions/nhanVien";
+import MemberForm from "./MemberForm";
 
 
 const styles = {
@@ -55,87 +55,91 @@ const MemberList = ({ ...props }) => {
     const [currentId, setCurrentId] = useState(0);
 
     useEffect(() => {
-        props.fetchAllProduct()
+        props.fetchAllNhanVien()
     }, [])
 
-    const onDelete = id => {
-        if (window.confirm('Are you sure to delete record?')) {
-            props.deleteProduct(id, () => { window.alert('Delete succesful') })
+    const onDelete = maNV => {
+        if (window.confirm('Are you sure to delete Nhan Vien ?')) {
+            props.deleteNhanVien(maNV, window.alert('Delete succesful'))
         }
     }
     return (
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Nhân Viên</h4>
-            </CardHeader>
-            <CardBody>
-              <Grid container spacing={2}>
-              <Grid item xs={12}>
-                  <TableForm {...{ currentId, setCurrentId }} />
-                </Grid>
+        <GridContainer>
+            <GridItem xs={12} sm={12} md={12}>
+                <Card>
+                    <CardHeader color="primary">
+                        <h4 className={classes.cardTitleWhite}>Nhân Viên</h4>
+                    </CardHeader>
+                    <CardBody>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <MemberForm {...{ currentId, setCurrentId }} />
+                            </Grid>
 
-                <Grid item md={12}>
-                  <TableContainer>
-                    <Table>
-                      <TableHead className={classes.root}>
-                        <TableRow>
-                            <TableCell>Mã Nhân Viên</TableCell>
-                          <TableCell>Tên Nhân Viên</TableCell>
-                          <TableCell>Ngày Sinh</TableCell>
-                          <TableCell>Điện Thoại</TableCell>
-                          <TableCell>Địa Chỉ</TableCell>
-                          <TableCell>Chức Vụ</TableCell>
-                          
-                        </TableRow>
-                      </TableHead>
-                      
-                      <TableBody>
-                        {props.productList.map((record, index) => {
-                          return (
-                            <TableRow key={record.MaMonAn} hover>
-                              <TableCell>{record.img_food} </TableCell>
-                              <TableCell>{record.TenMon}</TableCell>
-                              <TableCell>{record.price} </TableCell>
-                              <TableCell>{record.infomation} </TableCell>
-                             
-                              <TableCell>
-                                <ButtonGroup variant="text">
-                                  <Button>
-                                    <EditIcon color="primary" />
-                                  </Button>
-                                  <Button>
-                                    <DeleteIcon
-                                      color="secondary"
-                                      onClick={() => onDelete(record.id)}
-                                    />
-                                  </Button>
-                                </ButtonGroup>
-                              </TableCell>
-                            </TableRow>
-                          );
-                        })}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </Grid>
-                
-              </Grid>
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+                            <Grid item md={12}>
+                                <TableContainer>
+                                    <Table>
+                                        <TableHead className={classes.root}>
+                                            <TableRow>
+                                                <TableCell>Mã Nhân Viên</TableCell>
+                                                <TableCell>Tên Nhân Viên</TableCell>
+                                                <TableCell>Ngày gia nhập</TableCell>
+                                                <TableCell>Điện Thoại</TableCell>
+                                                <TableCell>Địa Chỉ</TableCell>
+                                                <TableCell>Chức Vụ</TableCell>
+
+                                            </TableRow>
+                                        </TableHead>
+
+                                        <TableBody>
+                                            {props.listNV.map((record, index) => {
+                                                return (
+                                                    <TableRow key={record.maNV} hover>
+                                                        <TableCell>{record.maNV} </TableCell>
+                                                        <TableCell>{record.tenNV}</TableCell>
+                                                        <TableCell>{record.dateStart}</TableCell>
+                                                        <TableCell>{record.dienThoai} </TableCell>
+                                                        <TableCell>{record.diaChi} </TableCell>
+                                                        <TableCell>{record.chucVu} </TableCell>
+                                                        <TableCell>
+                                                            <ButtonGroup variant="text">
+                                                                <Button>
+                                                                    <EditIcon
+                                                                        color="primary"
+                                                                        onClick={() => setCurrentId(record.maNV)}
+                                                                    />
+                                                                </Button>
+                                                                <Button>
+                                                                    <DeleteIcon
+                                                                        color="secondary"
+                                                                        onClick={() => onDelete(record.maNV)}
+                                                                    />
+                                                                </Button>
+                                                            </ButtonGroup>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                );
+                                            })}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </Grid>
+
+                        </Grid>
+                    </CardBody>
+                </Card>
+            </GridItem>
+        </GridContainer>
     );
 }
 
 const mapStateToProps = state => ({
-    productList: state.product.list
+    listNV: state.nhanVien.nhanVienList
 })
 
 const mapActionToProps = {
-    fetchAllProduct: actions.fetchAll,
-    deleteProduct: actions.Delete
+    fetchAllNhanVien: actions.fetchAllNhanVien,
+    deleteNhanVien: actions.DeleteNhanVien
 }
 
 export default connect(mapStateToProps, mapActionToProps)(MemberList);

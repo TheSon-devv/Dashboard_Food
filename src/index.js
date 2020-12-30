@@ -20,7 +20,8 @@ import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
-import {store} from "./actions/store";
+import { store } from "./actions/store";
+import { ToastProvider } from "react-toast-notifications";
 
 // core components
 import Admin from "layouts/Admin.js";
@@ -30,13 +31,15 @@ import "assets/css/material-dashboard-react.css?v=1.9.0";
 const hist = createBrowserHistory();
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={hist}>
-      <Switch>
-        <Route path="/admin" component={Admin} />
-        <Redirect from="/" to="/admin/dashboard" />
-      </Switch>
-    </Router>
-  </Provider>,
-  document.getElementById("root")
+    <Provider store={store}>
+        <ToastProvider autoDismiss={true}>
+            <Router history={hist}>
+                <Switch>
+                    <Route path="/admin" component={Admin} />
+                    <Redirect from="/" to="/admin/dashboard" />
+                </Switch>
+            </Router>
+        </ToastProvider>
+    </Provider>,
+    document.getElementById("root")
 );

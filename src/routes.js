@@ -7,43 +7,42 @@ import FoodsList from "views/TableList/Food/FoodsList.js";
 import OrderList from "views/TableList/Order/OrderList.js";
 import MemberList from "views/TableList/Member/MemberList.js";
 
-
 const dashboardRoutes = [
   {
     path: "/dashboard",
     name: "Dashboard",
     icon: Dashboard,
     component: DashboardPage,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/khachhang",
     name: "Quản lý khách hàng",
-    icon: "content_paste",
+    icon: "account_box",
     component: CustomerList,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/monan",
     name: "Quản lý món ăn",
     icon: "content_paste",
     component: FoodsList,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/datban",
     name: "Quản lý đặt bàn",
-    icon: "content_paste",
+    icon: "bookmark",
     component: OrderList,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/nhanvien",
     name: "Quản lý nhân viên",
-    icon: "content_paste",
+    icon: "assignment",
     component: MemberList,
-    layout: "/admin"
-  }
+    layout: "/admin",
+  },
 ];
 
 export default dashboardRoutes;

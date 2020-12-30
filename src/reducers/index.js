@@ -1,6 +1,16 @@
 import { combineReducers } from "redux";
-import product from "./product";
+import khachHang from "./khachHang";
+import nhanVien from "./nhanVien";
+import datBan from "./datBan";
+import monAn from "./monAn";
+import khuVuc from "./khuVuc";
+import hoaDon from "./hoaDon";
 
 export const reducers = combineReducers({
-    product
+    monAn,
+    khachHang,
+    nhanVien,
+    datBan,
+    khuVuc,
+    hoaDon
 })

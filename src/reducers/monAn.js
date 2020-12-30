@@ -1,9 +1,9 @@
-import { ACTION_TYPE } from "../actions/dCandidate";
+import { ACTION_TYPE } from "../actions/monAn";
 
 const initialState = {
     list: []
 }
-const dCandidate = (state = initialState, action) => {
+const monAn = (state = initialState, action) => {
     switch (action.type) {
         case ACTION_TYPE.FETCH_ALL:
             return {
@@ -20,15 +20,15 @@ const dCandidate = (state = initialState, action) => {
         case ACTION_TYPE.UPDATE:
             return {
                 ...state,
-                list: state.list.map(x => x.id === action.payload.id ? action.payload : x)
+                list: state.list.map(x => x.maMonAn === action.payload.maMonAn ? action.payload : x)
             }
         case ACTION_TYPE.DELETE:
             return {
                 ...state,
-                list: state.list.filter(x => x.id !== action.payload)
+                list: state.list.filter(x => x.maMonAn !== action.payload)
             }
         default:
             return state;
     }
 }
-export default dCandidate;
+export default monAn;

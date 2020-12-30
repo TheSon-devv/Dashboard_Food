@@ -7,15 +7,15 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-import {  Grid,  Table, TableHead, TableRow, TableCell, TableContainer, TableBody,  ButtonGroup, Button } from "@material-ui/core";
+import { Grid, Table, TableHead, TableRow, TableCell, TableContainer, TableBody, ButtonGroup, Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 
 import { connect } from "react-redux";
-import * as actions from "../../../actions/product";
-import TableForm from "views/TableList/Customer/CustomerForm";
-
+import * as actions from "../../../actions/khachHang";
+import CustomerForm from "./CustomerForm";
+import * as actionsKhuVuc from "../../../actions/khuVuc";
 
 const styles = {
     cardCategoryWhite: {
@@ -52,87 +52,92 @@ const useStyles = makeStyles(styles);
 
 const CustomerList = ({ ...props }) => {
     const classes = useStyles();
-    
+
     const [currentId, setCurrentId] = useState(0);
 
     useEffect(() => {
-        props.fetchAllProduct()
+        props.fetchAllKhuVuc();
+        props.fetchAllKhachHang();
     }, [])
 
-    const onDelete = id => {
-        if (window.confirm('Are you sure to delete record?')) {
-            props.deleteProduct(id, () => { window.alert('Delete succesful') })
+    const onDelete = maKH => {
+        if (window.confirm('Bạn có muốn xóa khách hàng ?')) {
+            props.deleteKhachHang(maKH, window.alert('Xóa thành công !') )
         }
     }
     return (
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Khách Hàng</h4>
-            </CardHeader>
-            <CardBody>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TableForm {...{ currentId, setCurrentId }} />
-                </Grid>
+        <GridContainer>
+            <GridItem xs={12} sm={12} md={12}>
+                <Card>
+                    <CardHeader color="primary">
+                        <h4 className={classes.cardTitleWhite}>Khách Hàng</h4>
+                    </CardHeader>
+                    <CardBody>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <CustomerForm {...{ currentId, setCurrentId }} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TableContainer>
+                                    <Table>
+                                        <TableHead className={classes.root}>
+                                            <TableRow>
+                                                <TableCell>Mã khách hàng</TableCell>
+                                                <TableCell>Tên khách hàng</TableCell>
+                                                <TableCell>Email</TableCell>
+                                                <TableCell>Điện Thoại</TableCell>
+                                                <TableCell>Khu Vực</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {props.listKH.map((record, index) => {
+                                                return (
+                                                    <TableRow key={record.maKH} hover>
+                                                        <TableCell>{record.maKH}</TableCell>
+                                                        <TableCell>{record.tenKH}</TableCell>
+                                                        <TableCell>{record.email} </TableCell>
+                                                        <TableCell>{record.phoneKH} </TableCell>
+                                                        <TableCell>{record.tenKV} </TableCell>
+                                                        <TableCell>
+                                                            <ButtonGroup variant="text">
+                                                                <Button>
+                                                                    <EditIcon 
+                                                                        color="primary" 
+                                                                        onClick={() => setCurrentId(record.maKH)}
+                                                                    />
+                                                                </Button>
+                                                                <Button>
+                                                                    <DeleteIcon
+                                                                        color="secondary"
+                                                                        onClick={() => onDelete(record.maKH)}
+                                                                    />
+                                                                </Button>
+                                                            </ButtonGroup>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                )
+                                            })}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </Grid>
 
-                <Grid item xs={12}>
-                  <TableContainer>
-                    <Table>
-                      <TableHead className={classes.root}>
-                        <TableRow>
-                          <TableCell>Mã khách hàng</TableCell>
-                          <TableCell>Tên khách hàng</TableCell>
-                          <TableCell>Email</TableCell>
-                          <TableCell>Điện Thoại</TableCell>
-                          <TableCell>Khu Vực</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {props.productList.map((record, index) => {
-                          return (
-                            <TableRow key={record.MaKH} hover>
-                              <TableCell>{record.TenKH}</TableCell>
-                              <TableCell>{record.email} </TableCell>
-                              <TableCell>{record.phoneKH} </TableCell>
-                              {/* <TableCell>{record.soluongton}</TableCell> */}
-                              <TableCell>
-                                <ButtonGroup variant="text">
-                                  <Button>
-                                    <EditIcon color="primary" />
-                                  </Button>
-                                  <Button>
-                                    <DeleteIcon
-                                      color="secondary"
-                                      onClick={() => onDelete(record.MaKH)}
-                                    />
-                                  </Button>
-                                </ButtonGroup>
-                              </TableCell>
-                            </TableRow>
-                          );
-                        })}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </Grid>
-                
-              </Grid>
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+                        </Grid>
+                    </CardBody>
+                </Card>
+            </GridItem>
+        </GridContainer>
     );
 }
 
 const mapStateToProps = state => ({
-    productList: state.product.list
+    listKH: state.khachHang.khachHanglist
 })
 
 const mapActionToProps = {
-    fetchAllProduct: actions.fetchAll,
-    deleteProduct: actions.Delete
+    fetchAllKhachHang: actions.fetchAllKhachHang,
+    fetchAllKhuVuc: actionsKhuVuc.fetchAllKhuVuc,
+    deleteKhachHang: actions.DeleteKhachHang
 }
 
 export default connect(mapStateToProps, mapActionToProps)(CustomerList);
