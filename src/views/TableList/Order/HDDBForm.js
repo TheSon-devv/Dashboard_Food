@@ -18,7 +18,11 @@ const styles = theme => ({
     },
     smMargin: {
         margin: theme.spacing(1)
-    }
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 150,
+    },
 })
 
 const initialValues = {
@@ -112,7 +116,7 @@ const HDDBForm = ({ classes, ...props }) => {
                         />
                     </div>
                     <div>
-                        <TextField
+                        {/* <TextField
                             name="trangThai"
                             id="outlined-select-currency"
                             select
@@ -127,25 +131,23 @@ const HDDBForm = ({ classes, ...props }) => {
                         >
                             <MenuItem value="Chưa thanh toán">Chưa thanh toán</MenuItem>
                             <MenuItem value="Đã thanh toán">Đã thanh toán</MenuItem>
-                        </TextField>
-                        {/* <FormControl variant="outlined">
-                            <InputLabel id="demo-simple-select-outlined-label">tt</InputLabel>
+                        </TextField> */}
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Trạng Thái</InputLabel>
                             <Select
                                 name="trangThai"
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
                                 value={values.trangThai}
                                 onChange={handleInputChange}
-                                label="TT"
+                                label="Trạng Thái"
                             >
                                 <MenuItem value="">
                                     <em>None</em>
                                 </MenuItem>
-                                <MenuItem value={values.trangThai}>Đã thanh toán</MenuItem>
-                                <MenuItem value={values.trangThai}>Chưa thanh toán</MenuItem>
+                                <MenuItem value="Đã thanh toán">Đã thanh toán</MenuItem>
+                                <MenuItem value="Chưa thanh toán">Chưa thanh toán</MenuItem>
 
                             </Select>
-                        </FormControl> */}
+                        </FormControl>
                         <TextField
                             name="maBan"
                             id="outlined-select-currency"
@@ -191,7 +193,7 @@ const HDDBForm = ({ classes, ...props }) => {
                         <Button variant="contained" color="primary" type="submit">
                             ADD
                         </Button>
-                        <Button type="reset" variant="contained" color="primary" onClick={resetForm}>
+                        <Button type="reset" variant="contained" color="default" onClick={resetForm}>
                             Reset
                         </Button>
                     </div>

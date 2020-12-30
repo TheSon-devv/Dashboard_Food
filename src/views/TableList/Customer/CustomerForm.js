@@ -77,10 +77,7 @@ const CustomerForm = ({ classes, ...props }) => {
 
             }
             if (props.currentId === 0)
-                props.createKH(values,
-                    addToast("Thêm khách hàng thành công !", { appearance: 'success' })
-
-                )
+                props.createKH(values,onSuccess)
             else
                 props.updateKH(props.currentId, values, onSuccess)
         }

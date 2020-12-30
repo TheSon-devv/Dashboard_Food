@@ -9,6 +9,7 @@ export const ACTION_TYPE_HDDB = {
 
 const formateData = data => ({
     ...data
+    // priceHDDB:parseInt(data.priceHDDB ? data.priceHDDB : 0)
 })
 
 

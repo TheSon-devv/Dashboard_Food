@@ -13,6 +13,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import { connect } from "react-redux";
 import * as actions from "../../../actions/monAn";
+import * as actionsNhaHang from "../../../actions/nhaHang";
+import * as actionsLMA from "../../../actions/loaiMonAn";
 import FoodForm from "views/TableList/Food/FoodForm";
 
 
@@ -55,12 +57,14 @@ const FoodsList = ({ ...props }) => {
     const [currentId, setCurrentId] = useState(0);
 
     useEffect(() => {
-        props.fetchAllMonAn()
+        props.fetchAllMonAn();
+        props.fetchAllLMA();
+        props.fetchAllNhaHang();
     }, [])
 
     const onDelete = maMonAn => {
         if (window.confirm('Are you sure to delete record?')) {
-            props.deleteMonAn(maMonAn, () => { window.alert('Delete succesful') })
+            props.deleteMonAn(maMonAn,window.alert('Đã xóa món ăn !') )
         }
     }
     return (
@@ -138,6 +142,8 @@ const mapStateToProps = state => ({
 
 const mapActionToProps = {
     fetchAllMonAn: actions.fetchAllMonAn,
+    fetchAllNhaHang: actionsNhaHang.fetchAllNhaHang,
+    fetchAllLMA: actionsLMA.fetchAllLMA,
     deleteMonAn: actions.DeleteMonAn
 }
 

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import useForm from "../useForm";
-import { Grid, TextField, withStyles, Button } from "@material-ui/core";
+import { Grid, TextField, withStyles, Button, MenuItem } from "@material-ui/core";
 import Card from "components/Card/Card.js";
 import { connect } from "react-redux";
 import * as actions from "../../../actions/monAn";
@@ -49,13 +49,13 @@ const FoodForm = ({ classes, ...props }) => {
         setErrors({
             ...temp
         })
-        if (fieldValues == values)
-            return Object.values(temp).every(x => x == "")
+        if (fieldValues === values)
+            return Object.values(temp).every(x => x === "")
     }
 
     const {
-        values, setValues, handleInputChange, errors, setErrors
-    } = useForm(initialValues, validate);
+        values, setValues, handleInputChange, errors, setErrors,resetForm
+    } = useForm(initialValues, validate,props.setCurrentId);
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -136,29 +136,43 @@ const FoodForm = ({ classes, ...props }) => {
                     <div>
                         <TextField
                             name="maLoai"
-                            variant="outlined"
-                            label="Mã Loại"
-                            type="text"
+                            id="outlined-select-currency"
+                            select
+                            label="Loại món ăn"
                             value={values.maLoai}
                             onChange={handleInputChange}
+                            variant="outlined"
                             {...(errors.maLoai && {
                                 error: true,
                                 helperText: errors.maLoai,
                             })}
-                        />
+                        >
+                            {props.LMAlist.map((e) => (
+                                <MenuItem key={e.maLoai} value={e.maLoai}>
+                                    {e.tenLoai}
+                                </MenuItem>
+                            ))}
+                        </TextField>
 
                         <TextField
                             name="maNhaHang"
-                            variant="outlined"
-                            label="Mã Nhà Hàng"
-                            type="text"
+                            id="outlined-select-currency"
+                            select
+                            label="Nhà Hàng"
                             value={values.maNhaHang}
                             onChange={handleInputChange}
+                            variant="outlined"
                             {...(errors.maNhaHang && {
                                 error: true,
                                 helperText: errors.maNhaHang,
                             })}
-                        />
+                        >
+                            {props.nhaHangList.map((e) => (
+                                <MenuItem key={e.maNhaHang} value={e.maNhaHang}>
+                                    {e.tenNhaHang}
+                                </MenuItem>
+                            ))}
+                        </TextField>
                         {/* <TextField
                             name="img_food"
                             variant="outlined"
@@ -171,12 +185,13 @@ const FoodForm = ({ classes, ...props }) => {
                                 helperText: errors.img_food,
                             })}
                         /> */}
+
                     </div>
                     <>
                         <Button variant="contained" color="primary" type="submit" >
                             ADD
                         </Button>
-                        <Button variant="contained" color="primary">
+                        <Button variant="contained" color="default" onClick={resetForm}>
                             Reset
                         </Button>
                     </>
@@ -187,7 +202,9 @@ const FoodForm = ({ classes, ...props }) => {
 }
 
 const mapStateToProps = state => ({
-    monAnList: state.monAn.list
+    monAnList: state.monAn.list,
+    nhaHangList: state.nhaHang.nhaHangList,
+    LMAlist: state.loaiMonAn.LMAList
 })
 
 const mapActionToProps = {

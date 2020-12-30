@@ -5,6 +5,9 @@ import datBan from "./datBan";
 import monAn from "./monAn";
 import khuVuc from "./khuVuc";
 import hoaDon from "./hoaDon";
+import admin from "./admin";
+import nhaHang from "./nhaHang";
+import loaiMonAn from "./loaiMonAn";
 
 export const reducers = combineReducers({
     monAn,
@@ -12,5 +15,8 @@ export const reducers = combineReducers({
     nhanVien,
     datBan,
     khuVuc,
-    hoaDon
+    hoaDon,
+    admin,
+    loaiMonAn,
+    nhaHang
 })

@@ -25,6 +25,7 @@ import { ToastProvider } from "react-toast-notifications";
 
 // core components
 import Admin from "layouts/Admin.js";
+import SignIn from "./views/Login/SignIn";
 
 import "assets/css/material-dashboard-react.css?v=1.9.0";
 
@@ -35,8 +36,9 @@ ReactDOM.render(
         <ToastProvider autoDismiss={true}>
             <Router history={hist}>
                 <Switch>
+                    <Route path="/signin" component={SignIn} />
                     <Route path="/admin" component={Admin} />
-                    <Redirect from="/" to="/admin/dashboard" />
+                    <Redirect from="/" to="/signin" />
                 </Switch>
             </Router>
         </ToastProvider>

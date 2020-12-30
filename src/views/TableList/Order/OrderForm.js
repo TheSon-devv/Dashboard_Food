@@ -90,14 +90,6 @@ const OrderForm = ({ classes, ...props }) => {
                     className={classes.root}
                     onSubmit={handleSubmit}
                 >
-                    {/* <div>
-                        <RadioGroup aria-label="gender" name="gender1" value={values.tt} onChange={handleInputChange}>
-                            <FormControlLabel value="female" control={<Radio />} label="Female" />
-                            <FormControlLabel value="male" control={<Radio />} label="Male" />
-                            <FormControlLabel value="other" control={<Radio />} label="Other" />
-                            <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" />
-                        </RadioGroup>
-                    </div> */}
                     <div>
                        
                         <TextField
@@ -112,18 +104,6 @@ const OrderForm = ({ classes, ...props }) => {
                                 helperText: errors.maMonAn,
                             })}
                         />
-                        {/* <TextField
-                            name="phone"
-                            variant="outlined"
-                            label="Điện thoại"
-                            type="text"
-                            value={values.phoneKH}
-                            onChange={handleInputChange}
-                            {...(errors.phone && {
-                                error: true,
-                                helperText: errors.phone,
-                            })}
-                        /> */}
                         <TextField
                             name="soLuongBan"
                             variant="outlined"
@@ -181,7 +161,7 @@ const OrderForm = ({ classes, ...props }) => {
                         <Button variant="contained" color="primary" type="submit">
                             ADD
                         </Button>
-                        <Button variant="contained" color="primary" >
+                        <Button variant="contained" color="default" >
                             Reset
                         </Button>
                     </div>

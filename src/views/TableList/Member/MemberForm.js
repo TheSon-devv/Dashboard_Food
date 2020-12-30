@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import useForm from "../useForm";
-import { Grid, TextField, withStyles, Button } from "@material-ui/core";
+import { Grid, TextField, withStyles, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import Card from "components/Card/Card.js";
 import { connect } from "react-redux";
 import * as actions from "../../../actions/nhanVien";
@@ -18,6 +18,10 @@ const styles = theme => ({
     },
     smMargin: {
         margin: theme.spacing(1)
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 150,
     }
 })
 
@@ -136,15 +140,22 @@ const MemberForm = ({ classes, ...props }) => {
                             onChange={handleInputChange}
 
                         />
-                        <TextField
-                            name="chucVu"
-                            variant="outlined"
-                            label="Chức Vụ"
-                            type="text"
-                            value={values.chucVu}
-                            onChange={handleInputChange}
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Trạng Thái</InputLabel>
+                            <Select
+                                name="chucVu"
+                                value={values.chucVu}
+                                onChange={handleInputChange}
+                                label="Chức Vụ"
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value="Nhân Viên">Nhân Viên</MenuItem>
+                                <MenuItem value="Quản lý">Quản lý</MenuItem>
 
-                        />
+                            </Select>
+                        </FormControl>
                     </div>
 
                     <div>

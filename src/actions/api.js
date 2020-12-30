@@ -59,3 +59,26 @@ export const hoaDon = (url = Url + 'HoaDonDatBan/') => {
         deleteHDDB: maHDDB => axios.delete(url + maHDDB)
     }
 }
+
+export const admin = (url = Url + 'Admin/') => {
+    return {
+        fetchAllAdmin: () => axios.get(url),
+        fetchByIdAdmin: id => axios.get(url + id),
+        createAdmin: newId => axios.post(url, newId),
+    }
+}
+
+
+export const loaiMonAn = (url = Url + 'LoaiMonAn/') => {
+    return {
+        fetchAllLMA: () => axios.get(url),
+        fetchByIdLMA: maLoai => axios.get(url + maLoai)
+    }
+}
+
+export const nhaHang = (url = Url + 'NhaHang/') => {
+    return {
+        fetchAllNhaHang: () => axios.get(url),
+        fetchByIdNhaHang: maNH => axios.get(url + maNH)
+    }
+}
