@@ -72,14 +72,10 @@ const CustomerForm = ({ classes, ...props }) => {
     const handleSubmit = e => {
         e.preventDefault();
         if (validate()) {
-            const onSuccess = () => {
-                addToast("Thêm khách hàng thành công !", { appearance: 'success' })
-
-            }
-            if (props.currentId === 0)
-                props.createKH(values,onSuccess)
+            if (props.currentId == 0)
+                props.createKH(values,addToast("Thêm khách hàng thành công !", { appearance: 'success' }))
             else
-                props.updateKH(props.currentId, values, onSuccess)
+                props.updateKH(props.currentId, values, addToast("Sửa khách hàng thành công !", { appearance: 'info' }))
         }
         console.log(values);
         // resetForm()

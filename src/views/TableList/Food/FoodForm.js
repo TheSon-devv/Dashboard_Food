@@ -4,6 +4,7 @@ import { Grid, TextField, withStyles, Button, MenuItem } from "@material-ui/core
 import Card from "components/Card/Card.js";
 import { connect } from "react-redux";
 import * as actions from "../../../actions/monAn";
+import { useToasts } from "react-toast-notifications";
 
 const styles = theme => ({
     root: {
@@ -54,16 +55,16 @@ const FoodForm = ({ classes, ...props }) => {
     }
 
     const {
-        values, setValues, handleInputChange, errors, setErrors,resetForm
-    } = useForm(initialValues, validate,props.setCurrentId);
+        values, setValues, handleInputChange, errors, setErrors, resetForm
+    } = useForm(initialValues, validate, props.setCurrentId);
 
     const handleSubmit = e => {
         e.preventDefault()
         if (validate()) {
             if (props.currentId == 0)
-                props.createMonAn(values, () => { window.alert('Da them') })
+                props.createMonAn(values, window.alert('Đã thêm món ăn'))
             else
-                props.updateMonAn(props.currentId, values, () => { window.alert('updated') })
+                props.updateMonAn(props.currentId, values, window.alert('Đã sửa món ăn'))
         }
         console.log(values)
     }
@@ -92,7 +93,7 @@ const FoodForm = ({ classes, ...props }) => {
                             type="text"
                             value={values.maMonAn}
                             onChange={handleInputChange}
-                            
+
                             {...(errors.maMonAn && {
                                 error: true,
                                 helperText: errors.maMonAn,

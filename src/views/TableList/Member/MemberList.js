@@ -59,8 +59,8 @@ const MemberList = ({ ...props }) => {
     }, [])
 
     const onDelete = maNV => {
-        if (window.confirm('Are you sure to delete Nhan Vien ?')) {
-            props.deleteNhanVien(maNV, window.alert('Delete succesful'))
+        if (window.confirm('Bạn có muốn xóa nhân viên này ?')) {
+            props.deleteNhanVien(maNV, window.alert('Đã xóa nhân viên !'))
         }
     }
     return (

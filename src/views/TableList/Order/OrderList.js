@@ -63,13 +63,13 @@ const OrderList = ({ ...props }) => {
     }, [])
 
     const onDeleteHoaDon = maHDDB => {
-        if (window.confirm('Are you sure to delete record?')) {
-            props.deleteHDDB(maHDDB, () => { window.alert('Delete succesful') })
+        if (window.confirm('Bạn có muốn xóa hóa đơn đặt bàn ?')) {
+            props.deleteHDDB(maHDDB, window.alert('Xóa thành công !') )
         }
     }
     const onDeleteDatBan = maBan => {
-        if (window.confirm('Are you sure to delete record?')) {
-            props.deleteDatBan(maBan, () => { window.alert('Delete succesful') })
+        if (window.confirm('Bạn có muốn xóa bàn đã đặt của khách hàng ?')) {
+            props.deleteDatBan(maBan, window.alert('Xóa thành công !') )
         }
     }
     return (

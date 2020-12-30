@@ -59,9 +59,9 @@ const MemberForm = ({ classes, ...props }) => {
         e.preventDefault()
         if (validate()) {
             if (props.currentId == 0)
-                props.createNhanVien(values, window.alert('Da them'))
+                props.createNhanVien(values, window.alert('Đã thêm nhân viên !'))
             else
-                props.updateNhanVien(props.currentId, values, window.alert('updated'))
+                props.updateNhanVien(props.currentId, values, window.alert('Đã sửa nhân viên !'))
         }
         console.log(values)
     }
@@ -141,7 +141,7 @@ const MemberForm = ({ classes, ...props }) => {
 
                         />
                         <FormControl variant="outlined" className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-outlined-label">Trạng Thái</InputLabel>
+                            <InputLabel id="demo-simple-select-outlined-label">Chức Vụ</InputLabel>
                             <Select
                                 name="chucVu"
                                 value={values.chucVu}

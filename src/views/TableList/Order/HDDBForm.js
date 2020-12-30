@@ -61,9 +61,9 @@ const HDDBForm = ({ classes, ...props }) => {
         e.preventDefault()
         if (validate()) {
             if (props.currentId == 0)
-                props.createHDDB(values, () => { window.alert('Da them') });
+                props.createHDDB(values,window.alert('Đã thêm hóa đơn !') );
             else
-                props.updateHDDB(props.currentId, values, () => { window.alert('updated') })
+                props.updateHDDB(props.currentId, values, window.alert('Đã sửa hóa đơn !'))
             resetForm()
         }
         console.log(values)

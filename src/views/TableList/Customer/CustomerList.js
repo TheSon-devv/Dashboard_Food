@@ -10,7 +10,7 @@ import CardBody from "components/Card/CardBody.js";
 import { Grid, Table, TableHead, TableRow, TableCell, TableContainer, TableBody, ButtonGroup, Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-
+import { useToasts } from "react-toast-notifications";
 
 import { connect } from "react-redux";
 import * as actions from "../../../actions/khachHang";
@@ -52,6 +52,7 @@ const useStyles = makeStyles(styles);
 
 const CustomerList = ({ ...props }) => {
     const classes = useStyles();
+    const { addToast } = useToasts()
 
     const [currentId, setCurrentId] = useState(0);
 
@@ -61,8 +62,8 @@ const CustomerList = ({ ...props }) => {
     }, [])
 
     const onDelete = maKH => {
-        if (window.confirm('Bạn có muốn xóa khách hàng ?')) {
-            props.deleteKhachHang(maKH, window.alert('Xóa thành công !') )
+        if (window.confirm('Bạn có muốn xóa khách hàng này ?')) {
+            props.deleteKhachHang(maKH, addToast("Xóa khách hàng thành công !", { appearance: 'success' }) )
         }
     }
     return (

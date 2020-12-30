@@ -63,7 +63,7 @@ const FoodsList = ({ ...props }) => {
     }, [])
 
     const onDelete = maMonAn => {
-        if (window.confirm('Are you sure to delete record?')) {
+        if (window.confirm('Bạn có muốn xóa món ăn này ?')) {
             props.deleteMonAn(maMonAn,window.alert('Đã xóa món ăn !') )
         }
     }
