@@ -6,78 +6,80 @@ import { connect } from "react-redux";
 import * as actions from "../../../actions/monAn";
 import { useToasts } from "react-toast-notifications";
 
-const styles = theme => ({
+const styles = (theme) => ({
     root: {
-        '& .MuiTextField-root': {
+        "& .MuiTextField-root": {
             margin: theme.spacing(1),
-            minWidth: 200
-        }
+            minWidth: 200,
+        },
     },
     fromGroup: {
         margin: theme.spacing(1),
-        minWidth: 230
+        minWidth: 230,
     },
     smMargin: {
-        margin: theme.spacing(1)
-    }
-})
+        margin: theme.spacing(1),
+    },
+});
 
 const initialValues = {
-    maMonAn: '',
-    tenMon: '',
+    maMonAn: "",
+    tenMon: "",
     price: 0,
-    infomation: '',
-    maLoai: '',
-    maNhaHang: '',
-    img_food: null
-}
+    infomation: "",
+    maLoai: "",
+    maNhaHang: "",
+    img_food: null,
+};
 
 const FoodForm = ({ classes, ...props }) => {
-
     const validate = (fieldValues = values) => {
-        let temp = {}
-        if ('maMonAn' in fieldValues)
-            temp.maMonAn = fieldValues.maMonAn ? "" : "This field is requied"
-        if ('tenMon' in fieldValues)
-            temp.tenMon = fieldValues.tenMon ? "" : "This field is requied"
-        if ('price' in fieldValues)
-            temp.price = fieldValues.price ? 0 : "This field is requied"
-        if ('maLoai' in fieldValues)
-            temp.maLoai = fieldValues.maLoai ? "" : "This field is requied"
-        if ('maNhaHang' in fieldValues)
-            temp.maNhaHang = fieldValues.maNhaHang ? "" : "This field is requied"
+        let temp = {};
+        if ("maMonAn" in fieldValues)
+            temp.maMonAn = fieldValues.maMonAn ? "" : "This field is requied";
+        if ("tenMon" in fieldValues)
+            temp.tenMon = fieldValues.tenMon ? "" : "This field is requied";
+        if ("price" in fieldValues)
+            temp.price = fieldValues.price ? 0 : "This field is requied";
+        if ("maLoai" in fieldValues)
+            temp.maLoai = fieldValues.maLoai ? "" : "This field is requied";
+        if ("maNhaHang" in fieldValues)
+            temp.maNhaHang = fieldValues.maNhaHang ? "" : "This field is requied";
 
         setErrors({
-            ...temp
-        })
-        if (fieldValues === values)
-            return Object.values(temp).every(x => x === "")
-    }
+            ...temp,
+        });
+        if (fieldValues == values) return Object.values(temp).every((x) => x == "");
+    };
 
-    const {
-        values, setValues, handleInputChange, errors, setErrors, resetForm
-    } = useForm(initialValues, validate, props.setCurrentId);
+    const { values, setValues, handleInputChange, errors, setErrors } = useForm(
+        initialValues,
+        validate
+    );
 
-    const handleSubmit = e => {
-        e.preventDefault()
+    const handleSubmit = (e) => {
+        e.preventDefault();
         if (validate()) {
             if (props.currentId == 0)
-                props.createMonAn(values, window.alert('Đã thêm món ăn'))
+                props.createMonAn(values, () => {
+                    window.alert("Da them");
+                });
             else
-                props.updateMonAn(props.currentId, values, window.alert('Đã sửa món ăn'))
+                props.updateMonAn(props.currentId, values, () => {
+                    window.alert("updated");
+                });
         }
-        console.log(values)
-    }
+        console.log(values);
+    };
 
     useEffect(() => {
         if (props.currentId != 0)
             setValues({
-                ...props.monAnList.find(x => x.maMonAn == props.currentId)
-            })
-    }, [props.currentId])
+                ...props.monAnList.find((x) => x.maMonAn == props.currentId),
+            });
+    }, [props.currentId]);
     return (
         <Grid container>
-
             <Card style={{ textAlign: "center" }}>
                 <form
                     noValidate
@@ -93,7 +95,6 @@ const FoodForm = ({ classes, ...props }) => {
                             type="text"
                             value={values.maMonAn}
                             onChange={handleInputChange}
-
                             {...(errors.maMonAn && {
                                 error: true,
                                 helperText: errors.maMonAn,
@@ -137,43 +138,29 @@ const FoodForm = ({ classes, ...props }) => {
                     <div>
                         <TextField
                             name="maLoai"
-                            id="outlined-select-currency"
-                            select
-                            label="Loại món ăn"
+                            variant="outlined"
+                            label="Mã Loại"
+                            type="text"
                             value={values.maLoai}
                             onChange={handleInputChange}
-                            variant="outlined"
                             {...(errors.maLoai && {
                                 error: true,
                                 helperText: errors.maLoai,
                             })}
-                        >
-                            {props.LMAlist.map((e) => (
-                                <MenuItem key={e.maLoai} value={e.maLoai}>
-                                    {e.tenLoai}
-                                </MenuItem>
-                            ))}
-                        </TextField>
+                        />
 
                         <TextField
                             name="maNhaHang"
-                            id="outlined-select-currency"
-                            select
-                            label="Nhà Hàng"
+                            variant="outlined"
+                            label="Mã Nhà Hàng"
+                            type="text"
                             value={values.maNhaHang}
                             onChange={handleInputChange}
-                            variant="outlined"
                             {...(errors.maNhaHang && {
                                 error: true,
                                 helperText: errors.maNhaHang,
                             })}
-                        >
-                            {props.nhaHangList.map((e) => (
-                                <MenuItem key={e.maNhaHang} value={e.maNhaHang}>
-                                    {e.tenNhaHang}
-                                </MenuItem>
-                            ))}
-                        </TextField>
+                        />
                         {/* <TextField
                             name="img_food"
                             variant="outlined"
@@ -186,31 +173,35 @@ const FoodForm = ({ classes, ...props }) => {
                                 helperText: errors.img_food,
                             })}
                         /> */}
-
                     </div>
                     <>
-                        <Button variant="contained" color="primary" type="submit" >
+                        <Button variant="contained" color="primary" type="submit">
                             ADD
-                        </Button>
-                        <Button variant="contained" color="default" onClick={resetForm}>
+            </Button>
+                        <Button
+                            variant="contained"
+                            style={{ marginLeft: "15px" }}
+                            color="primary"
+                        >
                             Reset
-                        </Button>
+            </Button>
                     </>
                 </form>
             </Card>
         </Grid>
     );
-}
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     monAnList: state.monAn.list,
-    nhaHangList: state.nhaHang.nhaHangList,
-    LMAlist: state.loaiMonAn.LMAList
-})
+});
 
 const mapActionToProps = {
     createMonAn: actions.createMonAn,
-    updateMonAn: actions.updateMonAn
-}
+    updateMonAn: actions.updateMonAn,
+};
 
-export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(FoodForm));
+export default connect(
+    mapStateToProps,
+    mapActionToProps
+)(withStyles(styles)(FoodForm));
